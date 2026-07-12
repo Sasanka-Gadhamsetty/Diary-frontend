@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
+import api from '../../api';
 
 const Images = () => {
   const location=useLocation();
@@ -27,7 +28,7 @@ const Images = () => {
     }
     console.log(data);
     console.log(files);
-    axios({
+    api({
       method:"POST",
       url:`images/${diary_id}`,
       headers:{

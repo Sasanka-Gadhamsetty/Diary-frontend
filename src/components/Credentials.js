@@ -8,6 +8,7 @@ import { BsTrash } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import {toast} from 'react-toastify';
 import "../css/Credentials.css";
+import api from "../../api";
 
 const formSchema = Yup.object().shape({
   platform: Yup.string()
@@ -30,7 +31,7 @@ const Credentials = () => {
 
   useEffect(() => {
     async function getUserCredentials() {
-      await axios({
+      await api({
         method: "get",
         url: `/credentials/${email}`,
         headers: {
@@ -47,7 +48,7 @@ const Credentials = () => {
     getUserCredentials();
   }, []);
   const refreshcomponent=()=>{   
-    axios({
+    api({
     method: "get",
     url: `/credentials/${email}`,
     headers: {
@@ -95,7 +96,7 @@ const Credentials = () => {
               const email = row.email;
               const platform = row.platform;
               toast.success('Credentials deleted');
-              axios({
+              api({
                 method: "delete",
                 url: `credentials?email=${email}&platform=${platform}`,
                 headers: {
@@ -144,7 +145,7 @@ const Credentials = () => {
 
   const handleOnSubmit = (values, actions) => {
     console.log(`submitting details:${JSON.stringify(values)}`);
-    axios({
+    api({
       method: "POST",
       url: `/credentials/add/${values.email}`,
       headers: {

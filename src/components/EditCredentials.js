@@ -7,6 +7,7 @@ import * as Yup from "yup";
 import {toast} from 'react-toastify';
 import '../css/EditCredentials.css';
 import diary_pic from '../images/diary_pic.png';
+import api from "../../api";
 
 
 const formSchema = Yup.object().shape({
@@ -26,7 +27,7 @@ const EditCredentials = () => {
   const handleOnSubmit=(values,actions)=>{
     console.log(`submitting details:${JSON.stringify(values)}`);
     toast.success('Credentials edited successfully');
-    axios({
+    api({
       method: "PUT",
       url: `/credentials/edit?email=${location.state.email}&platform=${location.state.platform}`,
       headers: {

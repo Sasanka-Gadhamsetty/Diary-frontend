@@ -11,6 +11,7 @@ import { BsTrash } from "react-icons/bs";
 import { BiEdit } from "react-icons/bi";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import api from "../../api";
 
 
 const Diary = () => {
@@ -27,7 +28,7 @@ const Diary = () => {
 
   useEffect(() => {
     async function getUsersData() {
-       await axios({
+       await api({
         method: "get",
         url: `/diaries/get/${email}`,
         headers: {
@@ -45,7 +46,7 @@ const Diary = () => {
   }, []);
 
   const refreshcomponentdiary=()=>{
-    axios({
+    api({
       method: "get",
       url: `/diaries/get/${email}`,
       headers: {
@@ -62,7 +63,7 @@ const Diary = () => {
 
   const onChange = (date) => {
     setDate(date);
-    axios({
+    api({
       method: "get",
       url: `/diaries/getNote?email=${email}&date=${moment(date).format(
         "YYYY/MM/DD"
@@ -115,7 +116,7 @@ const Diary = () => {
             onClick={() => {
               const date = row.date;
               toast.success('Note deleted');
-               axios({
+               api({
                 method: "delete",
                 url: `diaries/delete?email=${email}&date=${date}`,
                 headers: {
@@ -170,7 +171,7 @@ const Diary = () => {
     console.log(JSON.stringify(values.image));
     console.log(`submitting details:${JSON.stringify(values)}`);
    
-    axios({
+    api({
       method: "POST",
       url: `/diaries/add?email=${email}&date=${moment(date).format(
         "YYYY/MM/DD"

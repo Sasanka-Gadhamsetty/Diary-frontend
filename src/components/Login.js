@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useNavigate,Link } from "react-router-dom";
 import '../css/Login.css';
 import diary_pic from '../images/diary_pic.png';
+import api from "../../api";
 
 const formSchema = Yup.object().shape({
   email: Yup.string().email("Invalid email").required("Required"),
@@ -14,7 +15,7 @@ const formSchema = Yup.object().shape({
 const Login = () => {
   const navigate=useNavigate();
   const handleOnSubmit = (values, actions) => {
-    axios({
+    api({
       method: "POST",
       url: "/users/loginuser",
       data: values,

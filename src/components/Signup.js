@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
 import '../css/Signup.css';
 import diary_pic from '../images/diary_pic.png';
+import api from "../../api";
 
 const formSchema = Yup.object().shape({
   name: Yup.string().min(3,"It's too short").required("Required"),
@@ -19,7 +20,7 @@ const formSchema = Yup.object().shape({
 const Signup = () => {
   const navigate=useNavigate();
   const handleOnSubmit = (values, actions) => {
-    axios({
+    api({
       method: "POST",
       url: "/users/signup",
       data: values,

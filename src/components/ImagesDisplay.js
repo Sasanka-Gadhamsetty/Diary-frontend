@@ -2,6 +2,7 @@ import React, { useState,useEffect } from "react";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useLocation, useNavigate } from "react-router-dom";
+import api from "../../api";
 
 const ImagesDisplay = () => {
   const location = useLocation();
@@ -23,7 +24,7 @@ const ImagesDisplay = () => {
   useEffect(() => {
     async function getData() {
         console.log("Inside useEffect")
-     await axios({
+     await api({
         method:"GET",
         url:`images/${diary_id}`,
         headers: {

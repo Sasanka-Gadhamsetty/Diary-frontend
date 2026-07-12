@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import {toast} from 'react-toastify';
 import '../css/EditNote.css';
 import diary_pic from '../images/diary_pic.png';
+import api from '../../api';
 
 const formSchema = Yup.object().shape({
   description: Yup.string().min(5,"Description length should be atleast 5").max(2000,"Description max length is 2000").required("Required"),
@@ -27,7 +28,7 @@ const EditNote = () => {
     console.log("Inside handleonSubmit");
     console.log(`submitting details:${JSON.stringify(values)}`);
     toast.success('Note edited successfully');
-    axios({
+    api({
       method: "PUT",
       url: `/diaries/edit?email=${email}&date=${date}`,
       headers: {
